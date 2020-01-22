@@ -1,0 +1,24 @@
+﻿#############
+## Idea
+#############
+target/
+.idea/
+.idea
+.repository/
+*.iml
+*.iws
+*.jrtc
+*.class
+*.info
+*.properties
+*.jar
+
+/3.JavaMultithreading/
+/4.JavaCollections/git
+/5.OnlineInternship/
+/8.Games/
+/out/
+/JavaRushPlugin.properties
+/Instruction.png
+/out.log
+/out.log.*
