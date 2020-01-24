@@ -9,13 +9,11 @@ public class Solution implements Action {
     private int param;
 
     private Action solutionAction = new Action() {
-        //!!!!! Changes can be here
         //!!!!! Изменения могут быть тут
 
         public void someAction() {
-            //!!!!! All changes have to be here
             //!!!!! Все изменения должны быть только тут
-            if (param > 0){
+            if (param > 0) {
                 while (param > 0) {
                     System.out.println(param--);
                 }
@@ -24,17 +22,10 @@ public class Solution implements Action {
                     public Action getDependantAction() {
                         super.someAction();
                         return null;
-//                      ----или вместо return null;---
-//                        return new Action() {
-//                            @Override
-//                            public void someAction() {
-//                            }
-//                        };
-//                      ------------------------------
                     }
                 }.someAction();
             }
-            new SecondClass(){
+            new SecondClass() {
                 @Override
                 public void someAction() {
                     System.out.println(sb.append(SecondClass.SPECIFIC_ACTION_FOR_ANONYMOUS_SECOND_CLASS_PARAM).append(param).toString());
