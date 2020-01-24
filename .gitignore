@@ -1,7 +1,10 @@
 ﻿#############
 ## Idea
 #############
-/.idea
+target/
+.idea/
+.idea
+.repository/
 *.iml
 *.iws
 *.jrtc
@@ -10,9 +13,9 @@
 *.properties
 *.jar
 
-/4.JavaCollections/git
+
+/4.JavaCollections/
 /5.OnlineInternship/
-/8.Games/
 /out/
 /JavaRushPlugin.properties
 /Instruction.png
