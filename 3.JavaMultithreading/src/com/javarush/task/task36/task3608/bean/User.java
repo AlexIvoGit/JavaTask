@@ -58,6 +58,7 @@ public class User implements Cloneable {
         this.level = level;
     }
 
+
     @Override
     public String toString() {
         return "User{" +
