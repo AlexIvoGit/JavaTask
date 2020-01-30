@@ -1,3 +1,4 @@
+
 package com.javarush.task.task22.task2209;
 
 import java.io.BufferedReader;
@@ -5,57 +6,61 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /*
 Составить цепочку слов
 */
 public class Solution {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws IOException {
         //...
-        StringBuilder s = new StringBuilder();
-        String fileName = "";
-        try (BufferedReader readerConsole = new BufferedReader(new InputStreamReader(System.in))) {
-            fileName = readerConsole.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            while (reader.ready()) {
-                s.append(reader.readLine());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        StringBuilder result = getLine(s.toString());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader fileReader = new BufferedReader(new FileReader(reader.readLine()));
+
+        StringBuilder result = getLine(fileReader.readLine().split(" "));
         System.out.println(result.toString());
     }
 
     public static StringBuilder getLine(String... words) {
-        /*String s = words[0];
-        String[] strings = s.split(" ");
-        Arrays.sort(strings);
-        ArrayList<String> stringArrayList = new ArrayList<>();
-        stringArrayList.add(strings[0]);
+        if (words.length == 0) {
+            return new StringBuilder();
+        }
+
         StringBuilder stringBuilder = new StringBuilder();
-        String endWord = stringArrayList.get(stringArrayList.size() - 1).substring(stringArrayList.get(stringArrayList.size() - 1).length() - 1).toLowerCase();
-        int count = 0;
-        while (count != 3) {
-            for (int i = 1; i < strings.length; i++) {
-                strings[0] = "/";
-                String startWord = strings[i].substring(0, 1).toLowerCase();
-                if (startWord.equals(endWord)) {
-                    endWord = strings[i].substring(strings[i].length() - 1).toLowerCase();
-                    stringArrayList.add(strings[i]);
-                    strings[i] = "/";
-                }
+
+        ArrayList<String> list = new ArrayList<>();
+        ArrayList<String> tempList = new ArrayList<>();
+        for (int i = 0; i < words.length; i++) {
+            list.add(words[i]);
+            recursion(list, tempList, words);
+            list.remove(words[i]);
+        }
+
+        for (int i = 0; i < tempList.size(); i++) {
+            stringBuilder.append(tempList.get(i));
+            if (i != tempList.size() - 1) {
+                stringBuilder.append(" ");
             }
-            count++;
         }
-        for (String s1 : stringArrayList) {
-            stringBuilder.append(s1 + " ");
+
+        return stringBuilder;
+    }
+
+    public static void recursion(ArrayList<String> list, ArrayList<String> tempList, String... words) {
+        for (int i = 0; i < words.length; i++) {
+            String last = list.get(list.size() - 1);
+            if (!list.contains(words[i]) && Character.toLowerCase(last.charAt(last.length() - 1)) == Character.toLowerCase(words[i].charAt(0))) {
+                list.add(words[i]);
+                recursion(list, tempList, words);
+                list.remove(words[i]);
+            }
         }
-        return stringBuilder;*/
-        return new StringBuilder();
+
+        if (tempList.size() < list.size()) {
+            tempList.clear();
+            for (String string : list) {
+                tempList.add(string);
+            }
+        }
     }
 }
