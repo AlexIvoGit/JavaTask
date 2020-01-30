@@ -32,7 +32,7 @@ public class Solution {
         ArrayList<String> tempList = new ArrayList<>();
         for (int i = 0; i < words.length; i++) {
             list.add(words[i]);
-            recursion(list, tempList, words);
+            recursions(list, tempList, words);
             list.remove(words[i]);
         }
 
@@ -46,12 +46,12 @@ public class Solution {
         return stringBuilder;
     }
 
-    public static void recursion(ArrayList<String> list, ArrayList<String> tempList, String... words) {
+    public static void recursions(ArrayList<String> list, ArrayList<String> tempList, String... words) {
         for (int i = 0; i < words.length; i++) {
             String last = list.get(list.size() - 1);
             if (!list.contains(words[i]) && Character.toLowerCase(last.charAt(last.length() - 1)) == Character.toLowerCase(words[i].charAt(0))) {
                 list.add(words[i]);
-                recursion(list, tempList, words);
+                recursions(list, tempList, words);
                 list.remove(words[i]);
             }
         }
