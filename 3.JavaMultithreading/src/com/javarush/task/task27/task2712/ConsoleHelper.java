@@ -11,6 +11,7 @@ import java.util.List;
 public class ConsoleHelper {
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+
     public static void writeMessage(String message) {
         System.out.println(message);
     }
@@ -20,42 +21,19 @@ public class ConsoleHelper {
     }
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
-        List<Dish> dishes = new ArrayList<>();
-        System.out.println(Dish.allDishesToString());
-        System.out.println("Введите название блюда, введенное 'exit' означает завершение заказа.");
-        boolean orderReady = false;
-        while (!orderReady) {
-            String s = readString();
-            switch (s) {
-                case "Fish":
-                    dishes.add(Dish.Fish);
-                    break;
-                case "Juice":
-                    dishes.add(Dish.Juice);
-                    break;
-                case "Soup":
-                    dishes.add(Dish.Soup);
-                    break;
-                case "Steak":
-                    dishes.add(Dish.Steak);
-                    break;
-                case "Water":
-                    dishes.add(Dish.Water);
-                    break;
-                case "exit":
-                    orderReady = true;
-                    break;
+        List<Dish> dishesOrdered = new ArrayList<>();
+        writeMessage(Dish.allDishesToString());
+        writeMessage("Please select the dishes! To finish order please enter 'exit'");
+        while (true) {
+            String dishSelect = readString();
+            if (dishSelect.equals("exit")) {
+                return dishesOrdered;
+            } else if (Dish.allDishesToString().contains(dishSelect)) {
+                dishesOrdered.add(Dish.valueOf(dishSelect));
+            } else {
+                writeMessage("This dish doesn't exist. Please select the dish from the list!");
             }
         }
-        return dishes;
+
     }
-
-
-
-    /*
-- List<Dish> getAllDishesForOrder() - просит пользователя выбрать блюдо и добавляет его в список.
-    Выведи список всех блюд и попроси пользователя ввести строку - название блюда.
-    Введенное 'exit' означает завершение заказа.
-    В случае, если введенное блюдо не представлено в меню, выведи сообщение о том, что такого блюда нет и продолжи формирование заказа.
-    Исключения ввода-вывода бросай выше, на этом уровне не понятно, что с ними делать.*/
 }

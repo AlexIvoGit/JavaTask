@@ -1,19 +1,25 @@
 package com.javarush.task.task27.task2712.kitchen;
 
-public enum Dish {
-    Fish, Steak, Soup, Juice, Water;
+public enum Dish { Fish(25), Steak(30), Soup(15), Juice(5), Water(3);
+    private int duration;
 
-    public static String allDishesToString() {
-        Dish[] values = Dish.values();
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < values.length; i++) {
-            stringBuilder.append(values[i]);
-            if (i != values.length - 1) {
-                stringBuilder.append(", ");
-            } else if (i == values.length - 1) {
-                stringBuilder.append(".");
-            }
+    public int getDuration() {
+        return duration;
+    }
+
+    Dish(int duration) {
+        this.duration = duration;
+    }
+
+    public static String allDishesToString()
+    {
+        StringBuilder builder = new StringBuilder();
+        Dish[] dishes = Dish.values();
+        builder.append(dishes[0]);
+        for(Dish d : dishes)
+        {
+            builder.append(", " + d.name());
         }
-        return stringBuilder.toString();
+        return builder.toString();
     }
 }
